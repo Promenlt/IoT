@@ -47,8 +47,10 @@ function requestHandler(request, response) {
         response.end();
     //-----------------------------------------------------------------------------------------
     }else if(pathname == '/control'){
-        var request = JSON.toString(queryData.id);
+        console.log(queryData.id);
+        var request = JSON.stringify(queryData.id);
         client.on('connect',()=>{
+            console.log("RUNRUNRUNRUNRUNRUNRUNRUNRURNURNUNRUNRUN");
             client.publish("nhom14_controll",request);
         });
     } 

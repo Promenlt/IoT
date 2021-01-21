@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="911.0" prefWidth="474.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.LoginGUI">
+   <children>
+      <Pane prefHeight="911.0" prefWidth="474.0" style="-fx-background-color: black;">
+         <children>
+            <ImageView fitHeight="911.0" fitWidth="474.0" opacity="0.3" pickOnBounds="true">
+               <image>
+                  <Image url="@../../materials/abstract-986.jpg" />
+               </image>
+            </ImageView>
+            <TextField fx:id="password" layoutX="71.0" layoutY="484.0" prefHeight="31.0" prefWidth="333.0" />
+            <TextField fx:id="username" layoutX="71.0" layoutY="421.0" prefHeight="31.0" prefWidth="333.0" />
+            <Button layoutX="195.0" layoutY="573.0" mnemonicParsing="false" onAction="#enter" style="-fx-background-color: red;" text="LoginGUI" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Button>
+            <Label layoutX="55.0" layoutY="73.0" prefHeight="101.0" prefWidth="206.0" text="Smart" textFill="RED">
+               <font>
+                  <Font name="System Bold Italic" size="69.0" />
+               </font>
+            </Label>
+            <Label layoutX="124.0" layoutY="135.0" prefHeight="101.0" prefWidth="378.0" text="Watering" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="69.0" />
+               </font>
+            </Label>
+            <Label layoutX="80.0" layoutY="697.0" text="Don't have an account? Register now!" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
