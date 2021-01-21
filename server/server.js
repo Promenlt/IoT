@@ -5,6 +5,7 @@ var http = require('http');
 var querystring = require('querystring');
 var db = []; //database
 var humd;
+var id;
 const mqtt = require("mqtt");
 const client = mqtt.connect("tcp://broker.hivemq.com:1883");
 //---------------------------------------------------------------------------------------------
@@ -45,7 +46,13 @@ function requestHandler(request, response) {
         console.log(newData);
         response.end();
     //-----------------------------------------------------------------------------------------
-    } else if (pathname == '/get') {
+    }else if(pathname == '/control'){
+        var request = JSON.toString(queryData.id);
+        client.on('connect',()=>{
+            client.publish("nhom14_controll",request);
+        });
+    } 
+    else if (pathname == '/get') {
         response.writeHead(200, {
             'Content-Type': 'application/json'
         });
