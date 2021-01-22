@@ -56,7 +56,7 @@ public class HomeGUI extends Application {
             }
         });
     }
-    public void test(ActionEvent event){
+    public void test(ActionEvent event) throws Exception {
         Button btn = (Button) event.getSource();
         System.out.println("clicked");
         if(btn.getText().equals("ON")){
@@ -91,12 +91,12 @@ public class HomeGUI extends Application {
         }
     }
 
-    public void turnOn(){
-        System.out.println("turning ON");
+    public void turnOn() throws Exception {
+        HttpClientGet.sendGet("1");
     }
 
-    public void turnOff(){
-        System.out.println("turning OFF");
+    public void turnOff() throws Exception {
+        HttpClientGet.sendGet("0");
     }
 
 

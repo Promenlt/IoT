@@ -16,7 +16,7 @@ public class HttpClientGet {
         HttpClientGet http = new HttpClientGet();
 
         System.out.println("Testing 1 - Send Http GET request");
-        http.sendGet();
+//        http.sendGet();
 
 //        System.out.println("\nTesting 2 - Send Http POST request");
 //        http.sendPost();
@@ -24,9 +24,42 @@ public class HttpClientGet {
     }
 
     // HTTP GET request
-    private void sendGet() throws Exception {
+    public static void sendGet(String id) throws Exception {
 
-        String url = "http://127.0.0.1:8080/control?id=1";
+        String url = "http://127.0.0.1:8080/control?id="+id;
+
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        // optional default is GET
+        con.setRequestMethod("GET");
+
+        //add request header
+//        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("as","application/json");
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'GET' request to URL : " + url);
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        //print result
+        System.out.println("Respone from server: "+response.toString());
+
+    }
+
+    private void sendGet(String username, String passsword) throws Exception {
+
+        String url = "http://127.0.0.1:8080/control?id=0";
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
