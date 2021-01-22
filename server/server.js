@@ -20,11 +20,17 @@ function requestHandler(request, response) {
     var pathname = uriData.pathname;          // /update?
     var query = uriData.query;                // temp=30.5&hum=80
     var queryData = querystring.parse(query); // queryData.temp = 30.5, queryData.humd = 40
+        
+        // if(client.subscribe("nhom14_data")) {
+        //     console.log("subcribed!");
+        // }
+        
     
-    client.on('connect', () => {    
-        client.subscribe("nhom14_data");
-    })
+        // if(client.subscribe("nhom14_data")){
+        //     console.log("subcribed");
+        // }
     client.on('message', (topic, message) => {
+        console.log("Message"); 
         humd = message.toString();
         pathname = '/update?humd='+humd; 
         var newData = {
@@ -33,11 +39,11 @@ function requestHandler(request, response) {
         };
         db.push(newData);
         console.log(newData);
-        console.log(message.toString())
-        client.end();
+        console.log(message.toString());
     })
     //-----------------------------------------------------------------------------------------
     if (pathname == '/update') {
+        console.log("update"); 
         var newData = {
             humd: queryData.humd,
             time: new Date()
@@ -47,12 +53,18 @@ function requestHandler(request, response) {
         response.end();
     //-----------------------------------------------------------------------------------------
     }else if(pathname == '/control'){
-        console.log(queryData.id);
-        var request = JSON.stringify(queryData.id);
-        client.on('connect',()=>{
-            console.log("RUNRUNRUNRUNRUNRUNRUNRUNRURNURNUNRUNRUN");
-            client.publish("nhom14_controll",request);
-        });
+        console.log("control: "+queryData.id);
+        Number(queryData.id);
+        var request = JSON.stringify(Number(queryData.id));
+        // client.publish("nhom14_controll",request);
+
+            if(client.publish("nhom14_controll",request)){
+                console.log("request succesful!");
+             // client.publish("nhom14_controll",request);    
+            }
+            
+        response.end();
+        
     } 
     else if (pathname == '/get') {
         response.writeHead(200, {
@@ -71,6 +83,12 @@ function requestHandler(request, response) {
     }
     //-----------------------------------------------------------------------------------------
 }
+    client.on('connect', () => {   
+        console.log("Creating client."); 
+        if(client.subscribe("nhom14_data")){
+            console.log("subcribed");
+        }
+    })
 var server = http.createServer(requestHandler);
 server.listen(8080); 
 process.on('warning', e => console.warn(e.stack));
