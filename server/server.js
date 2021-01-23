@@ -3,6 +3,7 @@ var fs = require('fs');
 var url = require('url');
 var http = require('http');
 var querystring = require('querystring');
+const database = require('./connect_db');
 var db = []; //database
 var humd;
 var id;
@@ -37,6 +38,11 @@ function requestHandler(request, response) {
             humd: humd,
             time: new Date()
         };
+        var sql1 = 'UPDATE pump SET Pump_Humd=? WHERE Pump_ID=1'
+        database.query(sql1,[Number(humd)],function(err, results) {
+                    if (err) throw err;
+                    console.log("Updated success");
+        });
         db.push(newData);
         console.log(newData);
         console.log(message.toString());
@@ -61,6 +67,18 @@ function requestHandler(request, response) {
             if(client.publish("nhom14_controll",request)){
                 console.log("request succesful!");
              // client.publish("nhom14_controll",request);    
+            }
+            var sql2 = 'UPDATE pump SET Pump_Humd=?,Pump_Status=? WHERE Pump_ID=1'
+            if(Number(queryData.id)==1){
+                database.query(sql2,[Number(humd),1],function(err, results) {
+                            if (err) throw err;
+                            console.log("Update Sucess");
+                });
+            }else{
+                database.query(sql2,[0,0],function(err, results) {
+                            if (err) throw err;
+                            console.log("Update Sucess");
+                });
             }
             
         response.end();
