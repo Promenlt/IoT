@@ -30,7 +30,7 @@ public class LoginGUI extends Application {
         window = primaryStage;
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("login.fxml"));
+            root = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

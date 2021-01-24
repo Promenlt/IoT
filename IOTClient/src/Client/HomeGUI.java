@@ -61,13 +61,17 @@ public class HomeGUI extends Application {
         Button btn = (Button) event.getSource();
         System.out.println("clicked");
         if(btn.getText().equals("ON")){
-            turnOff();
-            btn.setText("OFF");
-            btn.setStyle("-fx-background-color: red;");
+            if(!turnOff().equals("")){
+                btn.setText("OFF");
+                btn.setStyle("-fx-background-color: red;");
+            }
+
         } else if(btn.getText().equals("OFF")){
-            turnOn();
-            btn.setText("ON");
-            btn.setStyle("-fx-background-color: green;");
+            if(!turnOn().equals("")){
+                btn.setText("ON");
+                btn.setStyle("-fx-background-color: green;");
+            }
+
         }
     }
 //    public void Switch(Button btn, ActionEvent event) {
@@ -84,12 +88,24 @@ public class HomeGUI extends Application {
 //    }
 
 
-    public void turnOn() throws Exception {
-        Test.requestPOST(Utils.ControlPackage(1));
+    public String turnOn()  {
+        String temp = "";
+        try {
+            temp = Test.requestPOST(Utils.ControlPackage(1));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return temp;
     }
 
-    public void turnOff() throws Exception {
-        Test.requestPOST(Utils.ControlPackage(0));
+    public String turnOff() {
+        String temp="";
+        try {
+            temp = Test.requestPOST(Utils.ControlPackage(0));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return temp;
     }
 
 

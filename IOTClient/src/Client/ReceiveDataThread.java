@@ -23,7 +23,9 @@ public class ReceiveDataThread extends Thread{
             }
 
             try {
-                AppData.setHumd(Integer.parseInt(Test.requestPOST(Utils.GetInfoPackage(home.getUUID()))));
+                String temp = Test.requestPOST(Utils.GetInfoPackage(home.getUUID()));
+                System.out.println("temp: "+temp);
+                AppData.setHumd(Integer.parseInt(temp));
             } catch (IOException e) {
                 e.printStackTrace();
             }

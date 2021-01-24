@@ -150,7 +150,7 @@ function requestHandler(request, response) {
                         response.writeHead(200, {
                             'Content-Type': 'application/json'
                         });
-                        response.end(JSON.stringify(db));
+                        response.end(JSON.stringify(humd));
                     })
                 }
             })
