@@ -121,6 +121,7 @@ function requestHandler(request, response) {
                     request.on('end', function() {
                     var sql2 = 'SELECT * FROM user WHERE User_Name=? AND User_Password=?'
                     database.query(sql2,[obj.username.toString(),obj.password.toString()],function(err, results) {
+                                console.log("results: "+results);
                                 if (err){
                                     response.writeHead(200, {
                                         'Content-Type': 'application/json'
@@ -128,7 +129,7 @@ function requestHandler(request, response) {
                                     response.end(JSON.stringify('Error'))
                                     throw err;
                                 }else{
-                                    if(results==null){
+                                    if(results==""){
                                         response.writeHead(200, {
                                             'Content-Type': 'application/json'
                                         });
