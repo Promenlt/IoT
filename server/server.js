@@ -100,14 +100,14 @@ function requestHandler(request, response) {
                     if(client.publish("nhom14_controll",request_mqtt)){
                        console.log("request succesful!");
                     }
-                    var sql2 = 'UPDATE pump SET Pump_Humd=?,Pump_Status=? WHERE Pump_ID=1'
+                    var sql2 = 'UPDATE pump SET Pump_Status=? WHERE Pump_ID=1'
                     if(requestId==1){
-                    database.query(sql2,[Number(humd),1],function(err, results) {
+                    database.query(sql2,[1],function(err, results) {
                             if (err) throw err;
                             console.log("Update Sucess");
                     });
                     }else{
-                    database.query(sql2,[0,0],function(err, results) {
+                    database.query(sql2,[0],function(err, results) {
                             if (err) throw err;
                             console.log("Update Sucess");
                     });
@@ -150,7 +150,7 @@ function requestHandler(request, response) {
                         response.writeHead(200, {
                             'Content-Type': 'application/json'
                         });
-                        response.end(JSON.stringify(db));
+                        response.end(JSON.stringify(humd));
                     })
                 }
             })
