@@ -262,7 +262,12 @@
                   <Font name="System Bold" size="29.0" />
                </font>
             </Label>
-            <Text fill="WHITE" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connected with UUID: ahsgd3ayusguy321829F">
+            <Text fill="WHITE" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connected with UUID:">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <Text fx:id="uuid" fill="WHITE" layoutX="204.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UUID">
                <font>
                   <Font size="19.0" />
                </font>
