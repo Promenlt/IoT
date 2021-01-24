@@ -43,10 +43,14 @@ public class LoginGUI extends Application {
     @FXML
     public void enter(ActionEvent event) throws IOException {
         System.out.println("loging");
-        if(Test.requestPOST(Utils.SigninPackage(username.getText(),password.getText())) == "accept"){
+        String temp = Test.requestPOST(Utils.SigninPackage(username.getText(),password.getText()));
+        System.out.println("Temp: "+temp);
+        System.out.println("\"accept\"");
+        if(temp.equals("\"accept\"")){
+            System.out.println("thông tin đúng!");
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("home.fxml"));
+            loader.setLocation(getClass().getResource("fxml/home.fxml"));
             Parent homeGUI = loader.load();
             Scene home = new Scene(homeGUI);
             //truyen data
@@ -60,6 +64,8 @@ public class LoginGUI extends Application {
                     System.exit(0);
                 }
             });
+        } else {
+            System.out.println("không chạy vào if.");
         }
 
     }

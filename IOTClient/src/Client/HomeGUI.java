@@ -35,7 +35,7 @@ public class HomeGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/home.fxml"));
         primaryStage.setTitle("Home");
         primaryStage.setScene(new Scene(root, 474, 1000));
         primaryStage.show();
@@ -130,7 +130,7 @@ public class HomeGUI extends Application {
     public void viewChart(ActionEvent event) throws IOException {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Client/home.fxml"));
+        loader.setLocation(getClass().getResource("Client/fxml/home.fxml"));
         Parent homeGUI = loader.load();
         Scene home = new Scene(homeGUI);
         //truyen data

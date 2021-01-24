@@ -274,7 +274,7 @@
             </Text>
          </children>
       </Pane>
-      <Button fx:id="AutoPumpbtn" layoutX="14.0" layoutY="791.0" mnemonicParsing="false" onAction="#testConnect" prefHeight="87.0" prefWidth="155.0" style="-fx-background-color: #A4A4A4;" text="AUTO PUMP">
+      <Button fx:id="AutoPumpbtn" layoutX="14.0" layoutY="791.0" mnemonicParsing="false"  prefHeight="87.0" prefWidth="155.0" style="-fx-background-color: #A4A4A4;" text="AUTO PUMP">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
