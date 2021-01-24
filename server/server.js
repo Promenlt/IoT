@@ -119,19 +119,26 @@ function requestHandler(request, response) {
         //check account valid
                 else if(requestCode.toString() =='signin'){
                     request.on('end', function() {
-                    var sql2 = 'SELECT * FROM user WHERE User_Name=?,User_Password=?'
+                    var sql2 = 'SELECT * FROM user WHERE User_Name=? AND User_Password=?'
                     database.query(sql2,[obj.username.toString(),obj.password.toString()],function(err, results) {
                                 if (err){
                                     response.writeHead(200, {
                                         'Content-Type': 'application/json'
                                     });
-                                    response.end(JSON.stringify('Not valid account'))
+                                    response.end(JSON.stringify('Error'))
                                     throw err;
                                 }else{
-                                    response.writeHead(200, {
-                                        'Content-Type': 'application/json'
-                                    });
-                                    response.end(JSON.stringify('accept'))
+                                    if(results==null){
+                                        response.writeHead(200, {
+                                            'Content-Type': 'application/json'
+                                        });
+                                        response.end(JSON.stringify('Not valid account'))
+                                    }else{
+                                        response.writeHead(200, {
+                                            'Content-Type': 'application/json'
+                                        });
+                                        response.end(JSON.stringify('accept'))
+                                    } 
                                 };
                                 console.log("Update Sucess");
                         });
