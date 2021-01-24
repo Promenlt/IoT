@@ -1,7 +1,7 @@
 package Client;
 
 public class Utils {
-    public static String API_URL = "http://127.0.0.1:3000";
+    public static String API_URL = "http://127.0.0.1:8080/api";
     public static String ControlPackage(int id){
         return "{\n\"code\" : \"control\",\n\"id\" : \""+id+"\"\n}";
     }

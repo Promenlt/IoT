@@ -119,7 +119,7 @@ function requestHandler(request, response) {
         //check account valid
                 else if(requestCode.toString() =='signin'){
                     request.on('end', function() {
-                    var sql2 = 'SELECT * FROM user WHERE User_Name=?,User_Password=?'
+                    var sql2 = 'SELECT * FROM user WHERE User_Name=? AND User_Password=?'
                     database.query(sql2,[obj.username.toString(),obj.password.toString()],function(err, results) {
                                 if (err){
                                     response.writeHead(200, {

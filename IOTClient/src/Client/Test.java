@@ -10,10 +10,10 @@ import java.net.URL;
 public class Test {
     public static void main(String args[]) throws Exception {
 
-//        requestPOST(Utils.ControlPackage(1));
-        System.out.println(Utils.ControlPackage(1));
-        System.out.println(Utils.SigninPackage("a","b"));
-        System.out.println(Utils.GetInfoPackage("auysgdyua67s76gyrsdf"));
+        requestPOST(Utils.SigninPackage("nhom141s","nhom14"));
+//        System.out.println(Utils.ControlPackage(1));
+//        System.out.println(Utils.SigninPackage("a","b"));
+//        System.out.println(Utils.GetInfoPackage("auysgdyua67s76gyrsdf"));
     }
 
     public static String requestPOST(String json) throws IOException {
