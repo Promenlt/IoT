@@ -1,4 +1,8 @@
-package Client;
+package Client.Connection;
+
+import Client.Entites.AppData;
+import Client.HomeGUI;
+import Client.Utils.Utils;
 
 import java.io.IOException;
 
@@ -9,7 +13,6 @@ public class ReceiveDataThread extends Thread{
     public ReceiveDataThread(HomeGUI home){
         this.home = home;
     }
-
 
 
     @Override
@@ -24,7 +27,7 @@ public class ReceiveDataThread extends Thread{
             }
 
             try {
-                temp = Test.requestPOST(Utils.GetInfoPackage(home.getUUID()));
+                temp = Connection.requestPOST(Utils.GetInfoPackage(home.getUUID()));
                 System.out.println("temp: "+temp);
 
 

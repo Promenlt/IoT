@@ -1,5 +1,7 @@
 package Client;
 
+import Client.Connection.Connection;
+import Client.Utils.Utils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -43,7 +45,7 @@ public class LoginGUI extends Application {
     @FXML
     public void enter(ActionEvent event) throws IOException {
         System.out.println("loging");
-        String temp = Test.requestPOST(Utils.SigninPackage(username.getText(),password.getText()));
+        String temp = Connection.requestPOST(Utils.SigninPackage(username.getText(),password.getText()));
         System.out.println("Temp: "+temp);
         System.out.println("\"accept\"");
         if(temp.equals("\"accept\"")){

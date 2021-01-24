@@ -1,4 +1,4 @@
-package Client;
+package Client.Entites;
 
 public class AppData {
     public static int humd;

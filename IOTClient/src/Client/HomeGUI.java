@@ -1,5 +1,9 @@
 package Client;
 
+import Client.Connection.Connection;
+import Client.Connection.ReceiveDataThread;
+import Client.Entites.AppData;
+import Client.Utils.Utils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -22,7 +26,6 @@ public class HomeGUI extends Application {
 
 //    private int[] wet = new int[16];
 
-    Connection http = new Connection();
     public static void main(String[] args) {
         launch(args);
     }
@@ -91,7 +94,7 @@ public class HomeGUI extends Application {
     public String turnOn()  {
         String temp = "";
         try {
-            temp = Test.requestPOST(Utils.ControlPackage(1));
+            temp = Connection.requestPOST(Utils.ControlPackage(1));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,7 +104,7 @@ public class HomeGUI extends Application {
     public String turnOff() {
         String temp="";
         try {
-            temp = Test.requestPOST(Utils.ControlPackage(0));
+            temp = Connection.requestPOST(Utils.ControlPackage(0));
         } catch (IOException e) {
             e.printStackTrace();
         }
