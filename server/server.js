@@ -96,12 +96,12 @@ function requestHandler(request, response) {
                     console.log('control')
                     var requestId= obj.id.toString();
                     Number(requestId);
-                    var request_mqtt = JSON.stringify(requestId);
+                    var request_mqtt = JSON.stringify(Number(requestId));
                     if(client.publish("nhom14_controll",request_mqtt)){
                        console.log("request succesful!");
                     }
                     var sql2 = 'UPDATE pump SET Pump_Status=? WHERE Pump_ID=1'
-                    if(requestId==1){
+                    if(Number(requestId)==1){
                     database.query(sql2,[1],function(err, results) {
                             if (err) throw err;
                             console.log("Update Sucess");
