@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -82,21 +83,13 @@ public class HomeGUI extends Application {
 //        }
 //    }
 
-    public void testConnect(){
-        try {
-            http.sendGet();
-//            http.sendPost();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void turnOn() throws Exception {
-        HttpClientGet.sendGet("1");
+        Test.requestPOST(Utils.ControlPackage(1));
     }
 
     public void turnOff() throws Exception {
-        HttpClientGet.sendGet("0");
+        Test.requestPOST(Utils.ControlPackage(0));
     }
 
 
@@ -160,6 +153,9 @@ public class HomeGUI extends Application {
     private Button AutoPumpbtn;
     @FXML
     private Button SwitchBtn1;
+    @FXML
+    private Text uuid;
+
 
     @FXML
     private Pane wet5;
@@ -176,6 +172,11 @@ public class HomeGUI extends Application {
     public void setName(String name) {
         Name.setText(name);
     }
+    public String getUUID(){
+        return uuid.getText();
+    }
+
+
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {

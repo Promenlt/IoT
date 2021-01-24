@@ -1,14 +1,12 @@
 package Client;
 
+import java.io.IOException;
+
 public class ReceiveDataThread extends Thread{
     private boolean isRunning = true;
-    int[] wet = new int[16];
     HomeGUI home;
     public ReceiveDataThread(HomeGUI home){
         this.home = home;
-        for(int i=0;i<16;i++){
-            wet[i]=(20*i)%100;
-        }
     }
 
 
@@ -24,25 +22,12 @@ public class ReceiveDataThread extends Thread{
                 e.printStackTrace();
             }
 
-//            System.out.println("receiving...");
-            for(int i=0;i<16;i++){
-                wet[i]+=7*i;
-                wet[i]=wet[i]%100;
+            try {
+                AppData.setHumd(Integer.parseInt(Test.requestPOST(Utils.GetInfoPackage(home.getUUID()))));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            home.setWet(wet);
             home.rePaintButtonColor();
-
-//            try{
-//                home.setWet(wet);
-////                HomeGUI.setWetColor(2);
-//                home.rePaintButtonColor();
-////                HomeGUI.getWet1().setStyle("-fx-background-color: #FFFFFF");
-//            } catch(Exception e) {
-//                System.out.println(e);
-//                continue;
-//            }
-
-
         }
 
     }

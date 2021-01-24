@@ -25,6 +25,8 @@ public class LoginGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+
         window = primaryStage;
         Parent root = null;
         try {
@@ -38,24 +40,28 @@ public class LoginGUI extends Application {
 //        receiveData();
 
     }
-
+    @FXML
     public void enter(ActionEvent event) throws IOException {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Client/home.fxml"));
-        Parent homeGUI = loader.load();
-        Scene home = new Scene(homeGUI);
-        //truyen data
-        HomeGUI HomeController = loader.getController();
-        HomeController.setName(username.getText());
-        stage.setScene(home);
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.exit();
-                System.exit(0);
-            }
-        });
+        System.out.println("loging");
+        if(Test.requestPOST(Utils.SigninPackage(username.getText(),password.getText())) == "accept"){
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("home.fxml"));
+            Parent homeGUI = loader.load();
+            Scene home = new Scene(homeGUI);
+            //truyen data
+            HomeGUI HomeController = loader.getController();
+            HomeController.setName(username.getText());
+            stage.setScene(home);
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            });
+        }
+
     }
 
 
@@ -65,5 +71,6 @@ public class LoginGUI extends Application {
 //    }
     @FXML
     private TextField username;
-
+    @FXML
+    private TextField password;
 }

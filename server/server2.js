@@ -14,7 +14,7 @@ const server = http.createServer(function(request, response) {
             request.on('end', function() {
             console.log('control')
             response.writeHead(200, {'Content-Type': 'text/html'})
-            response.end('control')
+            response.end('control '+obj.id)
             })            
         } 
 //-----------------------------------------------------------------------------
