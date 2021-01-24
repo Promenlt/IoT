@@ -125,13 +125,20 @@ function requestHandler(request, response) {
                                     response.writeHead(200, {
                                         'Content-Type': 'application/json'
                                     });
-                                    response.end(JSON.stringify('Not valid account'))
+                                    response.end(JSON.stringify('Error'))
                                     throw err;
                                 }else{
-                                    response.writeHead(200, {
-                                        'Content-Type': 'application/json'
-                                    });
-                                    response.end(JSON.stringify('accept'))
+                                    if(results==null){
+                                        response.writeHead(200, {
+                                            'Content-Type': 'application/json'
+                                        });
+                                        response.end(JSON.stringify('Not valid account'))
+                                    }else{
+                                        response.writeHead(200, {
+                                            'Content-Type': 'application/json'
+                                        });
+                                        response.end(JSON.stringify('accept'))
+                                    } 
                                 };
                                 console.log("Update Sucess");
                         });
