@@ -61,10 +61,10 @@ function requestHandler(request, response) {
     }else if(pathname == '/control'){
         console.log("control: "+queryData.id);
         Number(queryData.id);
-        var request = JSON.stringify(Number(queryData.id));
+        var request_mqtt = JSON.stringify(Number(queryData.id));
         // client.publish("nhom14_controll",request);
 
-            if(client.publish("nhom14_controll",request)){
+            if(client.publish("nhom14_controll",request_mqtt)){
                 console.log("request succesful!");
              // client.publish("nhom14_controll",request);    
             }
@@ -83,8 +83,72 @@ function requestHandler(request, response) {
             
         response.end();
         
-    } 
-    else if (pathname == '/get') {
+    }else if(pathname == '/api'){
+        if (request.method == 'POST') {
+            console.log('POST')
+            request.on('data', function(data) {
+                console.log('Partial body: ' + data)
+                var obj = JSON.parse(data);
+                var requestCode = obj.code;
+        //controll pump
+                if(requestCode.toString() == 'control') {
+                    request.on('end', function() {
+                    console.log('control')
+                    var requestId= obj.id.toString();
+                    Number(requestId);
+                    var request_mqtt = JSON.stringify(requestId);
+                    if(client.publish("nhom14_controll",request_mqtt)){
+                       console.log("request succesful!");
+                    }
+                    var sql2 = 'UPDATE pump SET Pump_Humd=?,Pump_Status=? WHERE Pump_ID=1'
+                    if(requestId==1){
+                    database.query(sql2,[Number(humd),1],function(err, results) {
+                            if (err) throw err;
+                            console.log("Update Sucess");
+                    });
+                    }else{
+                    database.query(sql2,[0,0],function(err, results) {
+                            if (err) throw err;
+                            console.log("Update Sucess");
+                    });
+                    }
+                    response.writeHead(200, {'Content-Type': 'text/html'})
+                    response.end('control')
+                    })            
+                } 
+        //check account valid
+                else if(requestCode.toString() =='signin'){
+                    request.on('end', function() {
+                    var sql2 = 'SELECT * FROM user WHERE User_Name=?,User_Password=?'
+                    database.query(sql2,[obj.username.toString(),obj.password.toString()],function(err, results) {
+                                if (err){
+                                    response.writeHead(200, {
+                                        'Content-Type': 'application/json'
+                                    });
+                                    response.end(JSON.stringify('Not valid account'))
+                                    throw err;
+                                }else{
+                                    response.writeHead(200, {
+                                        'Content-Type': 'application/json'
+                                    });
+                                    response.end(JSON.stringify('accept'))
+                                };
+                                console.log("Update Sucess");
+                        });
+                    }) 
+                }
+                else if(requestCode.toString()=='info'){
+                    request.on('end',function(){
+                        response.writeHead(200, {
+                            'Content-Type': 'application/json'
+                        });
+                        response.end(JSON.stringify(db));
+                    })
+                }
+            })
+        
+          } 
+    }else if (pathname == '/get') {
         response.writeHead(200, {
             'Content-Type': 'application/json'
         });
