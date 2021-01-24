@@ -1,4 +1,6 @@
-package Client;
+package Client.Connection;
+
+import Client.Utils.Utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,10 +9,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Test {
+public class Connection {
     public static void main(String args[]) throws Exception {
 
-        requestPOST(Utils.SigninPackage("nhom14","nhom14"));
+//        requestPOST(Utils.SigninPackage("nhom14","nhom14"));
 //        System.out.println(Utils.ControlPackage(1));
 //        System.out.println(Utils.SigninPackage("a","b"));
 //        System.out.println(Utils.GetInfoPackage("auysgdyua67s76gyrsdf"));

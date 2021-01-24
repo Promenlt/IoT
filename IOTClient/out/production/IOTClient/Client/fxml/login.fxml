@@ -12,7 +12,7 @@
          <children>
             <ImageView fitHeight="911.0" fitWidth="474.0" opacity="0.3" pickOnBounds="true">
                <image>
-                  <Image url="@../../materials/abstract-986.jpg" />
+                  <Image url="@../../../materials/abstract-986.jpg" />
                </image>
             </ImageView>
             <TextField fx:id="password" layoutX="71.0" layoutY="484.0" prefHeight="31.0" prefWidth="333.0" />

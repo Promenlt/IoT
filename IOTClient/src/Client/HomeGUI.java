@@ -1,5 +1,9 @@
 package Client;
 
+import Client.Connection.Connection;
+import Client.Connection.ReceiveDataThread;
+import Client.Entites.AppData;
+import Client.Utils.Utils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -20,9 +24,8 @@ import java.io.IOException;
 
 public class HomeGUI extends Application {
 
-    private int[] wet = new int[16];
+//    private int[] wet = new int[16];
 
-    Connection http = new Connection();
     public static void main(String[] args) {
         launch(args);
     }
@@ -61,13 +64,17 @@ public class HomeGUI extends Application {
         Button btn = (Button) event.getSource();
         System.out.println("clicked");
         if(btn.getText().equals("ON")){
-            turnOff();
-            btn.setText("OFF");
-            btn.setStyle("-fx-background-color: red;");
+            if(!turnOff().equals("")){
+                btn.setText("OFF");
+                btn.setStyle("-fx-background-color: red;");
+            }
+
         } else if(btn.getText().equals("OFF")){
-            turnOn();
-            btn.setText("ON");
-            btn.setStyle("-fx-background-color: green;");
+            if(!turnOn().equals("")){
+                btn.setText("ON");
+                btn.setStyle("-fx-background-color: green;");
+            }
+
         }
     }
 //    public void Switch(Button btn, ActionEvent event) {
@@ -84,23 +91,31 @@ public class HomeGUI extends Application {
 //    }
 
 
-    public void turnOn() throws Exception {
-        Test.requestPOST(Utils.ControlPackage(1));
+    public String turnOn()  {
+        String temp = "";
+        try {
+            temp = Connection.requestPOST(Utils.ControlPackage(1));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return temp;
     }
 
-    public void turnOff() throws Exception {
-        Test.requestPOST(Utils.ControlPackage(0));
+    public String turnOff() {
+        String temp="";
+        try {
+            temp = Connection.requestPOST(Utils.ControlPackage(0));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return temp;
     }
 
 
 
     public void rePaintButtonColor(){
 //        System.out.println("repainting..");
-        wet1.setStyle(colorValue(wet[1]));
-        wet2.setStyle(colorValue(wet[2]));
-        wet3.setStyle(colorValue(wet[3]));
-        wet4.setStyle(colorValue(wet[4]));
-        wet5.setStyle(colorValue(wet[5]));
+        wet1.setStyle(colorValue(AppData.humd));
     }
 
     public String colorValue(int wet){
@@ -120,13 +135,13 @@ public class HomeGUI extends Application {
         }
     }
 
-    public void setWet(int[] value) {
-        for(int i=0;i<16;i++){
-            wet[i] = value[i];
-//            System.out.print(wet[i]+" - ");
-        }
-
-    }
+//    public void setWet(int[] value) {
+//        for(int i=0;i<16;i++){
+//            wet[i] = value[i];
+////            System.out.print(wet[i]+" - ");
+//        }
+//
+//    }
     public void viewChart(ActionEvent event) throws IOException {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();

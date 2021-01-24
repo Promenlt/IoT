@@ -1,4 +1,4 @@
-package Client;
+package Client.Utils;
 
 public class Utils {
     public static String API_URL = "http://127.0.0.1:8080/api";
