@@ -40,7 +40,7 @@ public class HomeGUI extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/home.fxml"));
         primaryStage.setTitle("Home");
-        primaryStage.setScene(new Scene(root, 474, 1000));
+        primaryStage.setScene(new Scene(root, 1060, 805));
         primaryStage.show();
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -64,15 +64,17 @@ public class HomeGUI extends Application {
         Button btn = (Button) event.getSource();
         System.out.println("clicked");
         if(btn.getText().equals("ON")){
-            if(!turnOff().equals("")){
+            if(!turnOn().equals("")){
                 btn.setText("OFF");
                 btn.setStyle("-fx-background-color: red;");
+                wet1.setStyle("-fx-background-color: #ACFA58;");
             }
 
         } else if(btn.getText().equals("OFF")){
-            if(!turnOn().equals("")){
+            if(!turnOff().equals("")){
                 btn.setText("ON");
                 btn.setStyle("-fx-background-color: green;");
+                wet1.setStyle("-fx-background-color:  #FA5858;");
             }
 
         }
@@ -142,14 +144,17 @@ public class HomeGUI extends Application {
 //        }
 //
 //    }
-    public void viewChart(ActionEvent event) throws IOException {
+
+    @FXML
+    public void viewInfo(ActionEvent event) throws IOException {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Client/fxml/home.fxml"));
-        Parent homeGUI = loader.load();
-        Scene home = new Scene(homeGUI);
+        loader.setLocation(getClass().getResource("fxml/chart.fxml"));
+        Parent chartGUI = loader.load();
+        Scene home = new Scene(chartGUI);
         //truyen data
-        HomeGUI HomeController = loader.getController();
+        ChartGUI HomeController = loader.getController();
+        HomeController.setName(AppData.username);
         stage.setScene(home);
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -168,6 +173,8 @@ public class HomeGUI extends Application {
     private Button AutoPumpbtn;
     @FXML
     private Button SwitchBtn1;
+    @FXML
+    private Button viewInfoBtn;
     @FXML
     private Text uuid;
 
@@ -195,7 +202,6 @@ public class HomeGUI extends Application {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-
         assert AutoPumpbtn != null : "fx:id=\"AutoPumpbtn\" was not injected: check your FXML file 'home.fxml'.";
         assert wet5 != null : "fx:id=\"wet5\" was not injected: check your FXML file 'home.fxml'.";
         assert wet4 != null : "fx:id=\"wet4\" was not injected: check your FXML file 'home.fxml'.";
@@ -204,8 +210,8 @@ public class HomeGUI extends Application {
         assert wet1 != null : "fx:id=\"wet1\" was not injected: check your FXML file 'home.fxml'.";
         assert SwitchBtn1 != null : "fx:id=\"SwitchBtn1\" was not injected: check your FXML file 'home.fxml'.";
         assert Name != null : "fx:id=\"Name\" was not injected: check your FXML file 'home.fxml'.";
-        ReceiveDataThread thread = new ReceiveDataThread(this);
-        thread.start();
+        assert viewInfoBtn != null : "fx:id=\"viewInfoBtn\" was not injected: check your FXML file 'home.fxml'.";
+//        ReceiveDataThread thread = new ReceiveDataThread(this);
+//        thread.start();
     }
-
 }

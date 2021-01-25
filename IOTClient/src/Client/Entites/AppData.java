@@ -1,6 +1,7 @@
 package Client.Entites;
 
 public class AppData {
+    public static String username;
     public static int humd;
 
 

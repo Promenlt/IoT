@@ -1,6 +1,7 @@
 package Client;
 
 import Client.Connection.Connection;
+import Client.Entites.AppData;
 import Client.Utils.Utils;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -37,7 +38,7 @@ public class LoginGUI extends Application {
             e.printStackTrace();
         }
         window.setTitle("Home");
-        window.setScene(new Scene(root, 474, 900));
+        window.setScene(new Scene(root, 1060, 805));
         window.show();
 //        receiveData();
 
@@ -50,6 +51,7 @@ public class LoginGUI extends Application {
         System.out.println("\"accept\"");
         if(temp.equals("\"accept\"")){
             System.out.println("thông tin đúng!");
+            AppData.username = username.getText();
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("fxml/home.fxml"));
@@ -57,7 +59,7 @@ public class LoginGUI extends Application {
             Scene home = new Scene(homeGUI);
             //truyen data
             HomeGUI HomeController = loader.getController();
-            HomeController.setName(username.getText());
+            HomeController.setName(AppData.username);
             stage.setScene(home);
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
@@ -68,6 +70,8 @@ public class LoginGUI extends Application {
             });
         } else {
             System.out.println("không chạy vào if.");
+            username.setText("");
+            password.setText("");
         }
 
     }

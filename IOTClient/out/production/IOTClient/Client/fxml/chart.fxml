@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1060.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.ChartGUI">
+   <children>
+      <Pane fx:id="homePane" prefHeight="150.0" prefWidth="1060.0" style="-fx-background-color: #333333;">
+         <children>
+            <Label fx:id="Name" layoutX="14.0" layoutY="26.0" text="MyGarrdennn 001" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="29.0" />
+               </font>
+            </Label>
+            <Text fill="WHITE" layoutX="14.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connected with UUID:">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <Text fx:id="uuid" fill="WHITE" layoutX="210.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UUID">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="698.0" mnemonicParsing="false" onAction="#backToHome" prefHeight="87.0" prefWidth="155.0" style="-fx-background-color: #A4A4A4;" text="Back">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Button>
+      <LineChart fx:id="chart" layoutY="150.0" prefHeight="431.0" prefWidth="1060.0">
+        <xAxis>
+          <NumberAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <ChoiceBox layoutX="913.0" layoutY="608.0" prefHeight="43.0" prefWidth="133.0" />
+   </children>
+</AnchorPane>

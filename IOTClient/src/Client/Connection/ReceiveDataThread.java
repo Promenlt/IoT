@@ -1,5 +1,6 @@
 package Client.Connection;
 
+import Client.ChartGUI;
 import Client.Entites.AppData;
 import Client.HomeGUI;
 import Client.Utils.Utils;
@@ -10,10 +11,13 @@ public class ReceiveDataThread extends Thread{
     String temp = "0";
     private boolean isRunning = true;
     HomeGUI home;
-    public ReceiveDataThread(HomeGUI home){
-        this.home = home;
+    ChartGUI chart;
+//    public ReceiveDataThread(HomeGUI home){
+//        this.home = home;
+//    }
+    public ReceiveDataThread(ChartGUI chart){
+        this.chart = chart;
     }
-
 
     @Override
     public void run() {
@@ -27,7 +31,7 @@ public class ReceiveDataThread extends Thread{
             }
 
             try {
-                temp = Connection.requestPOST(Utils.GetInfoPackage(home.getUUID()));
+                temp = Connection.requestPOST(Utils.GetInfoPackage("111"));
                 System.out.println("temp: "+temp);
 
 
@@ -37,10 +41,11 @@ public class ReceiveDataThread extends Thread{
 
             try {
                 AppData.setHumd(Integer.parseInt(temp));
+                chart.addNewData(AppData.humd);
             } catch (Exception e){
                 System.out.println(e);
             }
-            home.rePaintButtonColor();
+
         }
 
     }
